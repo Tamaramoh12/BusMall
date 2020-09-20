@@ -11,6 +11,18 @@ header h1{
 main section{
     margin: 0px 60px 20px 60px;
 }
+main section h3{
+    text-align: center;
+    font-family: 'Pacifico', cursive;
+    font-size: 25px;
+    background-color: #80808073;
+    padding: 10px;
+    width: 300px;
+    margin-left: 450px;
+}
+main section p{
+    line-height: 30px;
+}
 main #imagesSection{
     margin-left: 65px;
 }
@@ -28,9 +40,8 @@ main #imagesSection img{
     padding-right: 50px;
     padding-left: 50px;
 }
-main ul{
-    color: red;
-}
+
 main ul li{
-    padding: 30px;
+    padding: 10px;
+    font-weight: bold;
 }

@@ -97,13 +97,13 @@ function handleVote(event){
 
   if(event.target.id === 'leftImage'){
         clickedImage = currentLeftImage;
-        console.log('left');
+        // console.log('left');
   } else if(event.target.id === 'middleImage'){
         clickedImage = currentMiddleImage;
-        console.log('middle');
+        // console.log('middle');
   } else if(event.target.id === 'rightImage'){
         clickedImage = currentRightImage;
-        console.log('right');
+        // console.log('right');
   }
 
   if(clickedImage){
@@ -114,7 +114,7 @@ function handleVote(event){
   console.log('votes  ' + clickedImage.votes);
   console.log('clicks  ' + totalClicks);
 
-
+ 
   if(totalClicks >= 25){
     imagesSection.removeEventListener('click',handleVote);
     displayResults();
