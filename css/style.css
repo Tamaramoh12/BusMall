@@ -34,6 +34,17 @@ main #imagesSection p{
     padding-right: 50px;
     padding-left: 50px;
 }
+main #imagesSection form{
+    padding-right: 50px;
+    padding-left: 50px;
+    padding-bottom: 3%;
+}
+main #imagesSection form label, main #imagesSection form input{
+    margin-right: 25px;
+}
+main #imagesSection form input[type = submit]:hover{
+    background-color:  #ffff00;
+}
 main #imagesSection img{
     width: 300px;
     height: 300px;
