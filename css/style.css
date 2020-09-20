@@ -1,0 +1,30 @@
+/* Primary Color : #ffff00 */
+
+header h1{
+    background-color: #ffff00;
+    font-family: 'Pacifico', cursive;
+    color: black;
+    margin: -20px -20px 20px -20px;
+    text-align: center;
+    padding: 15px;
+}
+main section{
+    margin: 0px 60px 20px 60px;
+}
+main #imagesSection{
+    margin-left: 65px;
+}
+main #imagesSection p{
+    font-family: cursive,'Pacifico','Acme';
+    font-weight: bold;
+    font-size: 38px;
+    letter-spacing: 17.3px;
+    padding-right: 50px;
+    padding-left: 50px;
+}
+main #imagesSection img{
+    width: 300px;
+    height: 300px;
+    padding-right: 50px;
+    padding-left: 50px;
+}
