@@ -28,3 +28,9 @@ main #imagesSection img{
     padding-right: 50px;
     padding-left: 50px;
 }
+main ul{
+    color: red;
+}
+main ul li{
+    padding: 30px;
+}
