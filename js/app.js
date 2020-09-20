@@ -16,7 +16,7 @@ var currentLeftImage;
 var currentMiddleImage;
 var currentRightImage;
 //variable to store the number of user clicks
-var totalClicks = 0;
+var totalClicks = 25;
 
 //creating the constructor
 function productImage(productName , imgPath){
@@ -55,18 +55,13 @@ function generateRandomImages(){
     middleImageIndex = Math.floor((Math.random() * allProducts.length));
     rightImageIndex = Math.floor((Math.random() * allProducts.length));
 
-    var indexArray = [leftImageIndex,middleImageIndex,rightImageIndex];
-    //to check that the  images are not the same
-    for(var i = 0; i < indexArray.length; i++){
-            if (indexArray[i] === indexArray[i+1]){ 
-            middleImageIndex = Math.floor((Math.random() * allProducts.length));
-            } else if (indexArray[i] === indexArray[i+2]){
-            rightImageIndex = Math.floor((Math.random() * allProducts.length));
-            } else if (indexArray[i+1] === indexArray[i+2]){
-            middleImageIndex = Math.floor((Math.random() * allProducts.length));
-            }
+    while(middleImageIndex===leftImageElement){
+    middleImageIndex = Math.floor((Math.random() * allProducts.length));
     }
+    while(rightImageIndex===leftImageElement ||rightImageIndex===middleImageIndex)
+    rightImageIndex = Math.floor((Math.random() * allProducts.length));
 
+ 
     displayRandomImages (leftImageIndex,middleImageIndex,rightImageIndex);
 }
 
@@ -109,17 +104,24 @@ function handleVote(event){
   if(clickedImage){
     clickedImage.votes++;
     generateRandomImages();
-    totalClicks++;
+    totalClicks--;
   }
   console.log('votes  ' + clickedImage.votes);
   console.log('clicks  ' + totalClicks);
 
  
-  if(totalClicks >= 25){
+  if(totalClicks <= 0){
     imagesSection.removeEventListener('click',handleVote);
     displayResults();
     console.log('thank you');
   }
+}
+var form = document.getElementById('form');
+form.addEventListener('submit',newClick);
+
+function newClick(event){
+  totalClicks = Number(document.getElementById('numberOfClick').value);
+  event.preventDefault();
 }
 
 function displayResults(){
