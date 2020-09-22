@@ -7,15 +7,16 @@ var allProducts = [];
 var allVotes = [];
 //array to store all timesDisplayed for all objects(on all images)
 var allTimeDisplayed  = [];
+//array to store all the names for all objects(on all images)
 var allImageNames = [];
 //get the elements from HTML page 
 var leftImageElement = document.getElementById('leftImage');
 var middleImageElement = document.getElementById('middleImage');
 var rightImageElement = document.getElementById('rightImage');
 //variables to store a random numbers in, which refers to the index of the allProducts array
-var leftImageIndex;
-var middleImageIndex;
-var rightImageIndex;
+var leftImageIndex = -1;
+var middleImageIndex = -1;
+var rightImageIndex = -1;
 //variables for the images which will be displayed
 var currentLeftImage;
 var currentMiddleImage;
@@ -60,7 +61,7 @@ function generateRandomImages(){
     middleImageIndex = Math.floor((Math.random() * allProducts.length));
     rightImageIndex = Math.floor((Math.random() * allProducts.length));
 
-    while(middleImageIndex===leftImageElement){
+    while(middleImageIndex===leftImageIndex){
     middleImageIndex = Math.floor((Math.random() * allProducts.length));
     }
 
@@ -125,6 +126,7 @@ function handleVote(event){
   if(totalClicks <= 0){
     imagesSection.removeEventListener('click',handleVote);
     displayResults();
+    chart();
     console.log('thank you');
   }
 }
@@ -146,42 +148,26 @@ function displayResults(){
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// //chart
-for (var i=0; i<allProducts.length;i++){
-  allVotes.push(allProducts[i].votes);
-  allTimeDisplayed.push(allProducts[i].timesDisplayed);
-  allImageNames.push(allProducts[i].productName);
+
+//function to display 
+function fillTheArrays(){ 
+  for (var i=0; i<allProducts.length;i++){
+    allVotes.push(allProducts[i].votes);
+    allTimeDisplayed.push(allProducts[i].timesDisplayed);
+    allImageNames.push(allProducts[i].productName);
+  }
 }
 
+//chart
 function chart(){ 
+  fillTheArrays();
 var lineChart = document.getElementById('myChart');
 var myChart = new Chart(lineChart, {
     type: 'bar',
     data: {
         labels: allImageNames,
         datasets: 
-        [{
-            label: '# of Displayed Times',
-            data: allTimeDisplayed,
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        },
-
+        [
         {
           label: '# of Votes',
           data: allVotes,
@@ -202,7 +188,30 @@ var myChart = new Chart(lineChart, {
             'rgba(198, 159, 64, 1)'
           ],
           borderWidth: 1
-      }]
+      },
+      {
+        label: '# of Displayed Times',
+        data: allTimeDisplayed,
+        backgroundColor: [
+          'rgba(255, 198, 198, 1)',
+          'rgba(255, 198, 198, 1)',
+          'rgba(255, 198, 198, 1)',
+          'rgba(255, 198, 198, 1)',
+          'rgba(255, 198, 198, 1)',
+          'rgba(255, 198, 198, 1)'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(255, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(255, 192, 192, 1)',
+          'rgba(255, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)'
+        ],
+        borderWidth: 1
+    }
+
+    ]
     },
     options: {
         scales: {
@@ -219,4 +228,3 @@ var myChart = new Chart(lineChart, {
 
 console.log(allVotes); //test
 
-chart();
