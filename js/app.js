@@ -1,6 +1,6 @@
 'use strict';
-
 //global variables
+
 //array to store all the objects
 var allProducts = [];  
 //array to store all votes for all objects(on all images)
@@ -55,17 +55,36 @@ new productImage('usb','images/usb.gif');
 new productImage('water-can','images/water-can.jpg');
 new productImage('wine-glass','images/wine-glass.jpg');
 
+//Function to compare the images with the previous row
+function contains(element, arr){
+  for(var i = 0; i<arr.length; i++){
+    if(arr[i] === element){
+      return true;
+    }
+  }
+  return false;
+}
+
 //Function to generate random images
 function generateRandomImages(){
+
+    var previouslyDisplayed = [leftImageIndex,middleImageIndex,rightImageIndex];
+    //generate the random numbers
     leftImageIndex = (Math.floor(Math.random() * allProducts.length));
     middleImageIndex = Math.floor((Math.random() * allProducts.length));
     rightImageIndex = Math.floor((Math.random() * allProducts.length));
 
-    while(middleImageIndex===leftImageIndex){
+    //guarantee that each image in the row will not appear in the same row or the previous row
+    //compare the left with the previous
+    while(contains(leftImageIndex,previouslyDisplayed)){
+      leftImageIndex = (Math.floor(Math.random() * allProducts.length));
+    }
+    //compare the middle with the left and previous 
+    while(middleImageIndex===leftImageIndex || contains(middleImageIndex,previouslyDisplayed) ){
     middleImageIndex = Math.floor((Math.random() * allProducts.length));
     }
-
-    while(rightImageIndex===leftImageIndex ||rightImageIndex===middleImageIndex){
+    //compare the right with the left and middle and previous 
+    while(rightImageIndex===leftImageIndex || rightImageIndex===middleImageIndex || rightImageIndex === contains(rightImageIndex,previouslyDisplayed)){
     rightImageIndex = Math.floor((Math.random() * allProducts.length));
     }
 
@@ -166,51 +185,108 @@ var myChart = new Chart(lineChart, {
     type: 'bar',
     data: {
         labels: allImageNames,
+
         datasets: 
         [
-        {
+        { //first element in the datasets array
           label: '# of Votes',
           data: allVotes,
-          backgroundColor: [
-            'rgba(198, 198, 198, 1)',
-            'rgba(198, 198, 198, 1)',
-            'rgba(198, 198, 198, 1)',
-            'rgba(198, 198, 198, 1)',
-            'rgba(198, 198, 198, 1)',
-            'rgba(198, 198, 198, 1)'
+          backgroundColor: [  //yellow
+            'rgb(249, 249, 47)',
+            'rgb(249, 249, 47)',
+            'rgb(249, 249, 47)',
+            'rgb(249, 249, 47)',
+            'rgb(249, 249, 47)',
+            'rgb(249, 249, 47)',
+            'rgb(249, 249, 47)',
+            'rgb(249, 249, 47)',
+            'rgb(249, 249, 47)',
+            'rgb(249, 249, 47)',
+            'rgb(249, 249, 47)',
+            'rgb(249, 249, 47)',
+            'rgb(249, 249, 47)',
+            'rgb(249, 249, 47)',
+            'rgb(249, 249, 47)',
+            'rgb(249, 249, 47)',
+            'rgb(249, 249, 47)',
+            'rgb(249, 249, 47)',
+            'rgb(249, 249, 47)',
+            'rgb(249, 249, 47)'
           ],
           borderColor: [
-            'rgba(198, 99, 132, 1)',
-            'rgba(198, 162, 235, 1)',
-            'rgba(198, 206, 86, 1)',
-            'rgba(198, 192, 192, 1)',
-            'rgba(198, 102, 255, 1)',
-            'rgba(198, 159, 64, 1)'
+            'rgb(249, 249, 47)',
+            'rgb(249, 249, 47)',
+            'rgb(249, 249, 47)',
+            'rgb(249, 249, 47)',
+            'rgb(249, 249, 47)',
+            'rgb(249, 249, 47)',
+            'rgb(249, 249, 47)',
+            'rgb(249, 249, 47)',
+            'rgb(249, 249, 47)',
+            'rgb(249, 249, 47)',
+            'rgb(249, 249, 47)',
+            'rgb(249, 249, 47)',
+            'rgb(249, 249, 47)',
+            'rgb(249, 249, 47)',
+            'rgb(249, 249, 47)',
+            'rgb(249, 249, 47)',
+            'rgb(249, 249, 47)',
+            'rgb(249, 249, 47)',
+            'rgb(249, 249, 47)',
+            'rgb(249, 249, 47)'
           ],
           borderWidth: 1
       },
+      //second element in the datasets array
       {
         label: '# of Displayed Times',
         data: allTimeDisplayed,
-        backgroundColor: [
-          'rgba(255, 198, 198, 1)',
-          'rgba(255, 198, 198, 1)',
-          'rgba(255, 198, 198, 1)',
-          'rgba(255, 198, 198, 1)',
-          'rgba(255, 198, 198, 1)',
-          'rgba(255, 198, 198, 1)'
+        backgroundColor: [  //dark gray
+          'rgb(81, 81, 73)',
+          'rgb(81, 81, 73)',
+          'rgb(81, 81, 73)',
+          'rgb(81, 81, 73)',
+          'rgb(81, 81, 73)',
+          'rgb(81, 81, 73)',
+          'rgb(81, 81, 73)',
+          'rgb(81, 81, 73)',
+          'rgb(81, 81, 73)',
+          'rgb(81, 81, 73)',
+          'rgb(81, 81, 73)',
+          'rgb(81, 81, 73)',
+          'rgb(81, 81, 73)',
+          'rgb(81, 81, 73)',
+          'rgb(81, 81, 73)',
+          'rgb(81, 81, 73)',
+          'rgb(81, 81, 73)',
+          'rgb(81, 81, 73)',
+          'rgb(81, 81, 73)',
+          'rgb(81, 81, 73)'
         ],
         borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(255, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(255, 192, 192, 1)',
-          'rgba(255, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)'
+          'rgb(81, 81, 73)',
+          'rgb(81, 81, 73)',
+          'rgb(81, 81, 73)',
+          'rgb(81, 81, 73)',
+          'rgb(81, 81, 73)',
+          'rgb(81, 81, 73)',
+          'rgb(81, 81, 73)',
+          'rgb(81, 81, 73)',
+          'rgb(81, 81, 73)',
+          'rgb(81, 81, 73)',
+          'rgb(81, 81, 73)',
+          'rgb(81, 81, 73)',
+          'rgb(81, 81, 73)',
+          'rgb(81, 81, 73)',
+          'rgb(81, 81, 73)',
+          'rgb(81, 81, 73)',
+          'rgb(81, 81, 73)',
+          'rgb(81, 81, 73)',
+          'rgb(81, 81, 73)',
+          'rgb(81, 81, 73)'
         ],
         borderWidth: 1
     }
-
     ]
     },
     options: {
