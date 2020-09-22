@@ -55,6 +55,16 @@ new productImage('usb','images/usb.gif');
 new productImage('water-can','images/water-can.jpg');
 new productImage('wine-glass','images/wine-glass.jpg');
 
+//function to aggregate the sum of the AllVotes array in each round
+  var sum = [0];
+  function summationOfVotes(){
+  for(var i=0; i < allVotes.length; i++){
+    sum.push(sum[i] + allVotes[i]);
+  }
+    // console.log(sum);
+    return sum;
+}
+
 //Function to compare the images with the previous row
 function contains(element, arr){
   for(var i = 0; i<arr.length; i++){
@@ -87,13 +97,8 @@ function generateRandomImages(){
     while(rightImageIndex===leftImageIndex || rightImageIndex===middleImageIndex || rightImageIndex === contains(rightImageIndex,previouslyDisplayed)){
     rightImageIndex = Math.floor((Math.random() * allProducts.length));
     }
-
-    // console.log(leftImageIndex,middleImageIndex,rightImageIndex);
-
     displayRandomImages (leftImageIndex,middleImageIndex,rightImageIndex);
 }
-
-
 
 //Function to display random images
 function displayRandomImages (left,middle,right){
@@ -112,7 +117,6 @@ function displayRandomImages (left,middle,right){
     rightImageElement.setAttribute('src',currentRightImage.imgPath);
 }
 generateRandomImages();
-
 
 //Attach an event listener to the section of the HTML page
 //where the images are going to be displayed.
@@ -146,7 +150,7 @@ function handleVote(event){
     imagesSection.removeEventListener('click',handleVote);
     displayResults();
     chart();
-    console.log('thank you');
+    // console.log('thank you');
   }
 }
 var form = document.getElementById('form');
@@ -166,20 +170,21 @@ function displayResults(){
     }
 }
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-//function to display 
+//function to fill the proprties of the objects, each one inside a separate array 
 function fillTheArrays(){ 
-  for (var i=0; i<allProducts.length;i++){
+  for (var i=0; i < allProducts.length;i++){
     allVotes.push(allProducts[i].votes);
     allTimeDisplayed.push(allProducts[i].timesDisplayed);
     allImageNames.push(allProducts[i].productName);
   }
+  //after we fill the allVotes array we call the summationOfVotes function 
+  //to aggregate the votes with the previous round votes 
+  console.log(summationOfVotes()); 
 }
 
 //chart
 function chart(){ 
-  fillTheArrays();
+fillTheArrays();
 var lineChart = document.getElementById('myChart');
 var myChart = new Chart(lineChart, {
     type: 'bar',
@@ -299,8 +304,40 @@ var myChart = new Chart(lineChart, {
         }
     }
 });
- 
-}
+} //end of chart function
 
-console.log(allVotes); //test
+
+localStorage.setItem('all votes',summationOfVotes());
+
+// sum = JSON.stringify(summationOfVotes());
+
+
+// console.log(storeArr);
+// localStorage.setItem('sum',sum);
+
+
+
+
+
+/////////////////////LAB 13//////////////////////
+//to add to localstorage (key,value) 
+//key refers to the label or pointer or variable that contain the value that will be persistent in local storage 
+// localStorage.setItem('item',5);
+//to read from local storage
+// localStorage.getItem('item');
+//to clear thelocal storage
+// localStorage.clear();
+//to remove a specific item
+// localStorage.removeItem('item')
+//convert the JS object to a JSON object (convert the objects to strings)
+// var JSobj = new Object('hi','hi');
+// var JSONobj = JSON.stringify(sum);
+
+
+
+
+
+
+
+
 
