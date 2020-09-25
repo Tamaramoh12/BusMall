@@ -2,6 +2,7 @@
 body{
     margin: 0px;
 }
+/* Start Header Style */
 header h1{
     background-color: #ffff00;
     font-family: 'Pacifico', cursive;
@@ -10,6 +11,9 @@ header h1{
     text-align: center;
     padding: 20px 15px 15px 15px;
 }
+/* End Header Style */
+
+/* Start Main Style */
 main section{
     margin: 0px 60px 20px 60px;
 }
@@ -22,9 +26,26 @@ main section h3{
 }
 main section p{
     line-height: 30px;
+    padding: 0% 60px;
+    font-size: 20px;
+}
+main ol{
+    padding: 0% 80px;
+    font-size: 18px;
+}
+main ol #olgroup1{
+    width: 50%;
+    float: left;
+    padding-bottom: 10px;
+}
+main ol #olgroup2{
+    width: 50%;
+    float: left;
+    padding-bottom: 10px;
 }
 main #imagesSection{
     margin-left: 65px;
+    margin-top: 350px;
 }
 main #imagesSection p{
     font-family: cursive,'Pacifico','Acme';
@@ -51,11 +72,11 @@ main #imagesSection img{
     padding-right: 50px;
     padding-left: 50px;
 }
-
 main ul li{
     padding: 10px;
     font-weight: bold;
 }
+/* End Main Style */
 
 /* Start Footer Style */
 footer{
