@@ -1,24 +1,24 @@
 /* Primary Color : #ffff00 */
-
+body{
+    margin: 0px;
+}
 header h1{
     background-color: #ffff00;
     font-family: 'Pacifico', cursive;
     color: black;
     margin: -20px -20px 20px -20px;
     text-align: center;
-    padding: 15px;
+    padding: 20px 15px 15px 15px;
 }
 main section{
     margin: 0px 60px 20px 60px;
 }
 main section h3{
-    text-align: center;
     font-family: 'Pacifico', cursive;
     font-size: 25px;
-    background-color: #80808073;
     padding: 10px;
     width: 300px;
-    margin-left: 450px;
+    margin-left: -12px;
 }
 main section p{
     line-height: 30px;
@@ -56,3 +56,15 @@ main ul li{
     padding: 10px;
     font-weight: bold;
 }
+
+/* Start Footer Style */
+footer{
+    background-color: #ffff00;
+    font-family: 'Pacifico', cursive;
+    font-weight: bold;
+    color: black;
+    text-align: center;
+    padding: 15px;
+    margin: -20px -20px -20px -20px;
+}
+/* End Footer Style */
