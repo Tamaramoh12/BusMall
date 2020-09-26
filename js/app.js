@@ -4,9 +4,9 @@
 //array to store all the objects
 var allProducts = [];  
 //array to store all votes for all objects(on all images)
-var allVotes = [];
+var allVotes = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 //array to store all timesDisplayed for all objects(on all images)
-var allTimeDisplayed  = [];
+var allTimeDisplayed  = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 //array to store all the names for all objects(on all images)
 var allImageNames = [];
 //get the elements from HTML page 
@@ -33,6 +33,12 @@ function productImage(productName , imgPath){
     allProducts.push(this);  //push is used to fill the array
     }
 
+    if(localStorage.getItem('allVotes')){
+      allVotes=JSON.parse(localStorage.getItem('allVotes'));
+      console.log('there is ');
+
+    }
+
 //create objects
 new productImage('bag','images/bag.jpg');
 new productImage('banana','images/banana.jpg');
@@ -56,14 +62,14 @@ new productImage('water-can','images/water-can.jpg');
 new productImage('wine-glass','images/wine-glass.jpg');
 
 //function to aggregate the sum of the AllVotes array in each round
-  var sum = [0];
-  function summationOfVotes(){
-  for(var i=0; i < allVotes.length; i++){
-    sum.push(sum[i] + allVotes[i]);
-  }
-    // console.log(sum);
-    return sum;
-}
+//   var sum = [0];
+//   function summationOfVotes(){
+//   for(var i=0; i < allVotes.length; i++){
+//     sum.push(sum[i] + allVotes[i]);
+//   }
+//     console.log( 'we are in the summationOfVotes function and the sum of all votes is ', sum[i] + allVotes[i]);
+//     return sum;
+// }
 
 //Function to compare the images with the previous row
 function contains(element, arr){
@@ -148,6 +154,9 @@ function handleVote(event){
  
   if(totalClicks <= 0){
     imagesSection.removeEventListener('click',handleVote);
+    fillTheArrays();
+
+  localStorage.setItem('allVotes',JSON.stringify(allVotes));
     displayResults();
     chart();
     // console.log('thank you');
@@ -173,18 +182,19 @@ function displayResults(){
 //function to fill the proprties of the objects, each one inside a separate array 
 function fillTheArrays(){ 
   for (var i=0; i < allProducts.length;i++){
-    allVotes.push(allProducts[i].votes);
-    allTimeDisplayed.push(allProducts[i].timesDisplayed);
-    allImageNames.push(allProducts[i].productName);
+    allVotes[i]+= allProducts[i].votes;
+    allTimeDisplayed[i]+= allProducts[i].timesDisplayed;
+    allImageNames[i]=allProducts[i].productName;
   }
   //after we fill the allVotes array we call the summationOfVotes function 
   //to aggregate the votes with the previous round votes 
-  console.log(summationOfVotes()); 
+  // console.log(summationOfVotes()); 
 }
 
 //chart
 function chart(){ 
-fillTheArrays();
+
+
 var lineChart = document.getElementById('myChart');
 var myChart = new Chart(lineChart, {
     type: 'bar',
@@ -307,7 +317,7 @@ var myChart = new Chart(lineChart, {
 } //end of chart function
 
 
-localStorage.setItem('all votes',summationOfVotes());
+// localStorage.setItem('all votes',summationOfVotes());
 
 // sum = JSON.stringify(summationOfVotes());
 
